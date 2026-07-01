@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>School Dashboard | SchoolQuest</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <div class="section-header">
+      <div>
+        <p class="eyebrow">School Admin</p>
+        <h1>School Dashboard</h1>
+      </div>
+      <a class="secondary" href="index.html">← Back to Home</a>
+    </div>
+
+    <div id="school-login" class="card">
+      <h2>Admin Access</h2>
+      <p>Enter the school admin code to view the dashboard.</p>
+      <div class="class-actions">
+        <input id="school-access-code" type="password" placeholder="Admin access code" />
+        <button id="school-login-button">Enter</button>
+      </div>
+    </div>
+
+    <div id="school-dashboard" class="hidden">
+      <div class="grid-two">
+        <section class="card">
+          <h2>Overview</h2>
+          <div id="school-overview" class="meta-row"></div>
+        </section>
+        <section class="card">
+          <h2>Quick Actions</h2>
+          <div class="class-actions">
+            <button id="btn-manage-teachers">Manage Teachers</button>
+            <button id="btn-manage-classes">Manage Classes</button>
+            <button id="btn-manage-students">Manage Students</button>
+          </div>
+        </section>
+      </div>
+      <section class="card">
+        <h2>Announcements</h2>
+        <p>Post school-wide announcements visible to students.</p>
+        <div class="class-actions">
+          <input id="school-announcement-title" type="text" placeholder="Announcement title" />
+          <textarea id="school-announcement-description" placeholder="Announcement description"></textarea>
+          <button id="add-school-announcement-button" type="button">Post Announcement</button>
+        </div>
+        <ul id="school-announcement-list"></ul>
+      </section>
+
+      <section class="card">
+        <h2>Create New Class</h2>
+        <p>Add a new school class and generate a join code.</p>
+        <div class="class-actions">
+          <input id="school-class-name" type="text" placeholder="Class name" />
+          <button id="add-school-class-button" type="button">Create Class</button>
+        </div>
+      </section>
+
+      <section id="manage-teachers-section" class="card hidden">
+        <div class="section-header">
+          <h2>Teachers</h2>
+          <p>Add or remove teachers and assign them to classes.</p>
+        </div>
+        <form id="teacher-form" class="class-actions">
+          <input id="teacher-name" type="text" placeholder="Full name" />
+          <input id="teacher-subject" type="text" placeholder="Subject" />
+          <input id="teacher-id" type="text" placeholder="Teacher ID" />
+          <button id="add-teacher-button" type="button">Add Teacher</button>
+        </form>
+        <ul id="teacher-list"></ul>
+      </section>
+
+      <section id="manage-classes-section" class="card hidden">
+        <div class="section-header">
+          <h2>Classes</h2>
+          <p>Assign teachers to classes.</p>
+        </div>
+        <ul id="class-assign-list"></ul>
+      </section>
+
+      <section id="manage-students-section" class="card hidden">
+        <div class="section-header">
+          <h2>Students</h2>
+          <p>View and remove students.</p>
+        </div>
+        <ul id="student-list"></ul>
+      </section>
+    </div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

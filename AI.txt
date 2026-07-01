@@ -1,0 +1,468 @@
+I want to integrate **Google Gemini API** into my SchoolQuest project. This should be a real AI integration, not a rule-based chatbot or fake AI.
+
+The project currently uses HTML, CSS, JavaScript, and localStorage. Firebase will be added later. The AI should be built in a modular way so it can easily connect to Firebase in the future.
+
+The AI should become an **AI Study Assistant** for students and an **AI Teaching Assistant** for teachers.
+
+---
+
+# AI Integration Requirements
+
+Use the official Google Gemini API.
+
+Create a separate JavaScript file (for example `ai.js`) that handles all AI-related functions.
+
+Store the API key separately in a configuration file and make it easy to replace later. Include comments explaining that API keys should never be exposed in production and that a backend should be used when Firebase is added.
+
+Use asynchronous JavaScript (`fetch()` and `async/await`) and include proper loading indicators and error handling.
+
+---
+
+# Student AI Assistant
+
+Create a dedicated page or panel called:
+
+**AI Study Assistant**
+
+Students should be able to ask natural language questions.
+
+Examples:
+
+* Explain Newton's Laws.
+* Help me understand Algebra.
+* Summarize this chapter.
+* Give me important points.
+* Create 10 MCQs from this topic.
+* Make flashcards.
+* Create revision notes.
+* Explain this in simple language.
+* Give me practice questions.
+* Ask me quiz questions.
+* Check my understanding.
+
+The AI should return clean, well-formatted answers.
+
+---
+
+# AI Study Planner
+
+Students should enter:
+
+* Subjects
+* Exam Dates
+* Available Study Hours Per Day
+
+The AI should generate:
+
+* A personalized study timetable
+* Daily study goals
+* Revision schedule
+* Subject priorities
+* Suggested breaks
+* Final revision plan
+
+---
+
+# Homework Helper
+
+Students should be able to paste homework questions.
+
+The AI should:
+
+* Explain the concept.
+* Give hints.
+* Guide the student.
+* Avoid simply providing the final answer unless explicitly requested.
+
+---
+
+# Quiz Generator
+
+Students enter a topic.
+
+Examples:
+
+* Electricity
+* Fractions
+* Photosynthesis
+
+The AI generates:
+
+* Multiple Choice Questions
+* Short Answer Questions
+* True/False Questions
+* Fill in the Blanks
+
+---
+
+# Notes Generator
+
+Students provide:
+
+* A topic
+  or
+* Class notes
+
+The AI creates:
+
+* Short Notes
+* Key Points
+* Important Definitions
+* Revision Summary
+
+---
+
+# Teacher AI Assistant
+
+Teachers should have a separate AI section.
+
+Teachers can ask the AI to:
+
+* Generate homework
+* Generate assignments
+* Create quizzes
+* Create notices
+* Create lesson plans
+* Generate worksheets
+* Create classroom activities
+* Suggest project ideas
+* Prepare revision questions
+
+The output should be editable before posting to students.
+
+---
+
+# Future Analytics AI
+
+Do not fully implement this yet, but create placeholders for future AI insights such as:
+
+Student Performance Analysis
+
+Example:
+
+"You are performing well in Science but need more practice in Mathematics."
+
+Homework Analysis
+
+Example:
+
+"You complete homework on time but frequently delay assignments."
+
+Teacher Insights
+
+Example:
+
+"80% of your class struggled with Chapter 4. Consider revising this topic."
+
+---
+
+# AI Chat Interface
+
+Create a clean chat interface with:
+
+* Chat history
+* User messages
+* AI messages
+* Loading animation while waiting for a response
+* Error message if the API request fails
+* Auto-scroll to the latest message
+
+---
+
+# Prompt Engineering
+
+Write system prompts that make the AI behave like a supportive educational assistant.
+
+The AI should:
+
+* Explain concepts clearly.
+* Encourage learning.
+* Use age-appropriate language.
+* Structure answers using headings and bullet points.
+* Avoid harmful or inappropriate content.
+* Focus on helping students understand instead of simply giving answers.
+
+---
+
+# Technical Requirements
+
+* Use the official Google Gemini API.
+* Use modern JavaScript with async/await.
+* Keep AI logic separate from the rest of the application.
+* Make the code clean, modular, and well-commented.
+* Prepare the project so Firebase authentication and cloud storage can be integrated later without major code changes.
+
+The AI should feel like an intelligent study companion that helps students learn and assists teachers in creating educational content, making SchoolQuest a complete AI-powered school platform.
+
+---
+
+# AI Analytics & Performance Insights
+
+In addition to being an AI Study Assistant and AI Teaching Assistant, the AI should also function as an **AI Analytics Engine** that continuously analyzes data across the platform and provides personalized insights for Students, Teachers, and Schools.
+
+The AI should use all available data stored in the application (currently localStorage and later Firebase) to identify trends, strengths, weaknesses, and areas for improvement.
+
+The goal is to make the AI proactive rather than reactive. Instead of only answering questions, it should automatically analyze user activity and generate meaningful recommendations.
+
+---
+
+## Student AI Analytics
+
+The AI should analyze:
+
+* Homework completion rate
+* Assignment completion rate
+* Attendance percentage
+* XP earned
+* Level progression
+* Study streaks
+* Quiz scores (future)
+* Daily activity
+* Weekly activity
+* Subjects that require more attention
+
+The AI should automatically generate insights such as:
+
+* Your strongest subject
+* Your weakest subject
+* Homework consistency
+* Assignment consistency
+* Attendance trends
+* Study habits
+* Areas needing improvement
+* Overall academic progress
+
+Examples:
+
+* "You have completed 95% of your Science homework but only 60% of your Mathematics homework."
+* "Your attendance has improved over the last month."
+* "You usually submit assignments close to the deadline."
+* "You are maintaining a 12-day study streak."
+
+The AI should also recommend personalized actions, such as:
+
+* Subjects to revise more often
+* Weekly study goals
+* Suggested revision schedule
+* Recommended practice frequency
+* Time management tips
+
+---
+
+## Student Graphs
+
+Display visual analytics using charts.
+
+Examples:
+
+* Homework Completion Over Time
+* Assignment Submission Rate
+* Attendance Trend
+* XP Growth
+* Level Progression
+* Weekly Study Activity
+* Subject-wise Performance
+
+Use Chart.js (or another free JavaScript chart library) to create interactive graphs.
+
+---
+
+## Teacher AI Analytics
+
+The AI should analyze every class and generate useful teaching insights.
+
+The AI should calculate:
+
+* Homework completion percentage
+* Assignment submission percentage
+* Attendance percentage
+* Student engagement
+* Average XP
+* Average class level
+* Most active students
+* Students requiring additional attention
+
+The AI should automatically provide suggestions.
+
+Examples:
+
+* "Class 8A performs well in Science assignments."
+* "Five students have missed more than three assignments."
+* "Homework completion drops on Fridays."
+* "Attendance has decreased over the past two weeks."
+
+The AI should recommend:
+
+* Students needing support
+* Topics that require revision
+* Additional practice assignments
+* Suggested quizzes
+
+---
+
+## Teacher Graphs
+
+Create interactive charts showing:
+
+* Homework Completion
+* Assignment Completion
+* Attendance
+* XP Distribution
+* Student Participation
+* Weekly Activity
+* Monthly Progress
+
+---
+
+## School AI Analytics
+
+The School Dashboard should contain AI-powered school-wide analytics.
+
+The AI should compare:
+
+* Classes
+* Teachers
+* Student engagement
+* Attendance
+* Homework completion
+* Assignment completion
+* XP growth
+* Academic performance
+
+Generate insights such as:
+
+* Most Active Class
+* Best Performing Class
+* Highest Average Attendance
+* Highest Homework Completion Rate
+* Teacher with Highest Student Engagement
+* Students At Risk of Falling Behind
+
+Examples:
+
+* "Class 9B has the highest overall engagement."
+* "Grade 8 attendance has decreased by 6% this month."
+* "Teacher Patel's classes consistently have high homework completion."
+
+The AI should recommend school-wide improvements.
+
+---
+
+## School Graphs
+
+Display dashboards with charts including:
+
+* School Attendance Trends
+* Homework Completion by Class
+* Assignment Completion by Class
+* Student XP Distribution
+* Teacher Performance Comparison
+* Monthly Student Engagement
+* Class Performance Comparison
+* Academic Growth Trends
+
+---
+
+## AI Dashboard
+
+Create a dedicated AI Analytics Dashboard for each user.
+
+### Student Dashboard
+
+Display:
+
+* AI Insights
+* Academic Score
+* Progress Graphs
+* Weekly Goals
+* Recommended Improvements
+
+### Teacher Dashboard
+
+Display:
+
+* Class Insights
+* Student Performance
+* Teaching Recommendations
+* Charts
+* Students Needing Attention
+
+### School Dashboard
+
+Display:
+
+* School Health Score
+* Performance Charts
+* Teacher Analytics
+* Class Rankings
+* School-wide Recommendations
+
+---
+
+## Future Predictive AI
+
+Design the system so it can later support predictive analytics.
+
+Examples:
+
+* Predict students who may struggle academically.
+* Predict students at risk of low attendance.
+* Predict assignment completion trends.
+* Predict class performance before examinations.
+
+Do not fully implement predictive AI yet, but structure the code so it can be added later.
+
+---
+
+## Technical Requirements
+
+* Use the Google Gemini API for generating AI insights and recommendations.
+* Use Chart.js for all graphs and visual analytics.
+* Keep AI logic modular in a separate JavaScript file.
+* Keep chart generation separate from AI logic.
+* Make the AI capable of analyzing stored data rather than only responding to chat prompts.
+* Design the architecture so that replacing localStorage with Firebase later requires minimal changes.
+* The AI should behave like an intelligent academic advisor that continuously monitors progress and helps Students, Teachers, and Schools make better decisions.
+
+---
+
+# Google Gemini API Integration (Final Phase Only)
+
+**Important:** Do **not** integrate the Google Gemini API immediately.
+
+The AI features should first be developed using placeholder functions, dummy data, and a modular architecture. This allows the application's UI, workflow, and logic to be fully completed and tested before connecting to the real AI service.
+
+The Google Gemini API should be integrated only in the **final phase of development** for the following reasons:
+
+* Prevent exposing the API key during early development.
+* Avoid unnecessary API usage while the application is still changing.
+* Reduce development costs and API requests.
+* Make debugging easier by separating application logic from AI functionality.
+* Ensure the project architecture is complete before connecting external services.
+
+## AI Architecture
+
+Build the AI system so that all AI requests are handled through a dedicated module (for example, `ai.js`).
+
+For now:
+
+* Create placeholder functions that return mock AI responses.
+* Ensure every AI feature calls these placeholder functions.
+* The rest of the application should not depend directly on the Gemini API.
+
+When development is complete:
+
+* Replace the placeholder functions with real Google Gemini API requests.
+* The rest of the application should continue working without modification.
+
+## API Security
+
+The Google Gemini API key must **never** be hardcoded directly into production code or committed to GitHub.
+
+For development, use a temporary configuration file if necessary.
+
+For deployment (such as on Vercel), store the API key using **Environment Variables** so it remains private and secure.
+
+Design the code so switching from a development API key to a production environment requires minimal changes.
+
+The objective is to keep the project secure, modular, and easy to maintain while following modern software development practices.

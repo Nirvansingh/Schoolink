@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Dashboard | SchoolQuest</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <div class="section-header">
+      <div>
+        <p class="eyebrow">Student Dashboard</p>
+        <h1>Join Classes & View Content</h1>
+      </div>
+      <a class="secondary" href="index.html">← Back to Home</a>
+    </div>
+
+    <section id="student-profile-section" class="card">
+      <h2>Create Your Student Profile</h2>
+      <p>Register your full name and roll number before joining a class.</p>
+      <form id="student-profile-form">
+        <input id="student-name" type="text" placeholder="Full name" />
+        <input id="student-roll" type="text" placeholder="Student number / roll number" />
+        <button id="save-profile-button" type="submit">Save Profile</button>
+      </form>
+    </section>
+
+    <section id="student-join-section" class="card hidden">
+      <div class="section-header">
+        <div>
+          <h2>Join a Class</h2>
+          <p>Enter the class join code provided by your teacher.</p>
+        </div>
+      </div>
+      <div class="class-actions">
+        <input id="join-class-code" type="text" placeholder="Class join code" />
+        <button id="join-class-button">Join Class</button>
+      </div>
+    </section>
+
+    <section id="student-dashboard-section" class="hidden">
+      <div class="student-top">
+        <section class="card">
+          <h2>Your Profile</h2>
+            <p id="student-profile-summary"></p>
+            <p id="student-progress-summary" class="meta-row"></p>
+            <p id="student-attendance-summary" class="meta-row"></p>
+        </section>
+        <section class="card">
+          <h2>Joined Classes</h2>
+          <ul id="joined-classes-list"></ul>
+        </section>
+      </div>
+
+      <section class="card">
+        <div class="section-header">
+          <div>
+            <h2>Class Content</h2>
+            <p>Use the tabs to switch between homework, assignments, notices, and teacher communication.</p>
+          </div>
+          <select id="student-class-select"></select>
+        </div>
+        <div id="class-tabs" class="tab-row hidden"></div>
+        <div id="class-content"></div>
+      </section>
+
+      <section class="card">
+        <div class="section-header">
+          <div>
+            <h2>AI Study Assistant</h2>
+            <p>Use AI to get study plans, homework help, quizzes, and study notes.</p>
+          </div>
+          <a class="secondary" href="student-ai.html">Open AI Assistant</a>
+        </div>
+      </section>
+      <section class="card">
+        <div class="section-header">
+          <div>
+            <h2>School Announcements</h2>
+            <p>Announcements posted by your school appear here.</p>
+          </div>
+        </div>
+        <ul id="school-announcement-list"></ul>
+      </section>
+
+      <section class="card">
+        <div class="section-header">
+          <div>
+            <h2>Backup & Restore</h2>
+            <p>Download or restore your local prototype data.</p>
+          </div>
+        </div>
+        <div class="class-actions">
+          <button id="download-backup">Download Backup</button>
+          <input id="restore-file" type="file" accept="application/json" style="display:none" />
+          <button id="restore-backup">Restore Backup</button>
+        </div>
+      </section>
+    </section>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const dl = document.getElementById('download-backup');
+      const rb = document.getElementById('restore-backup');
+      const input = document.getElementById('restore-file');
+      if (dl) dl.addEventListener('click', () => window.Storage.downloadExport());
+      if (rb) rb.addEventListener('click', () => input && input.click());
+      if (input) input.addEventListener('change', async (e) => {
+        const f = e.target.files[0]; if (!f) return;
+        const text = await f.text();
+        try {
+          const parsed = JSON.parse(text);
+          if (!confirm('This will overwrite existing data. Continue?')) return;
+          window.Storage.importAll(parsed, { overwrite: true });
+          notify('Restore complete. Reloading page.', 'success'); location.reload();
+        } catch (err) { notify('Invalid file', 'error'); }
+      });
+    });
+  </script>
+</body>
+</html>

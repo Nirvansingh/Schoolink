@@ -1,0 +1,474 @@
+Continue developing and improving the existing **SchoolQuest** prototype. Do **not** change the overall workflow or introduce Firebase yet. Continue using only **HTML, CSS, JavaScript, and localStorage**.
+
+The goal is to make SchoolQuest feel like a complete **School Management + Student Engagement Platform** while keeping it as a fully functional frontend prototype.
+
+---
+
+# General Improvements
+
+* Improve the overall UI to make it cleaner, more modern, colorful, and professional.
+* Use cards, rounded corners, icons, better spacing, and an attractive color palette.
+* Keep the design responsive and easy to navigate.
+* Organize the code into reusable functions and keep it modular.
+
+---
+
+# Overall Workflow
+
+When the website opens, the user should see three options:
+
+* School
+* Teacher
+* Student
+
+Each role should have its own dashboard.
+
+---
+
+# School Dashboard
+
+## School Login
+
+For now, use a fixed School Admin access code.
+
+Example:
+`ADMIN2026`
+
+If the code is correct, redirect to the School Dashboard.
+
+---
+
+## School Dashboard Features
+
+### School Overview
+
+Display summary cards showing:
+
+* Total Teachers
+* Total Students
+* Total Classes
+* Total Homework
+* Total Assignments
+* Total Notices
+
+---
+
+### Teacher Management
+
+The school can:
+
+* Add teachers
+* Remove teachers
+* View all teachers
+
+Each teacher should have:
+
+* Name
+* Subject
+* Teacher ID
+
+---
+
+### Class Management
+
+The school can:
+
+* Create classes
+* Delete classes
+* Assign teachers to classes
+* View all existing classes
+
+---
+
+### Student Management
+
+Display every student with:
+
+* Name
+* Roll Number
+* Joined Class
+* XP
+* Level
+
+---
+
+### School Announcements
+
+The school administrator can post announcements visible to every class.
+
+---
+
+### School Analytics
+
+Display:
+
+* Most Active Class
+* Student with Highest XP
+* Homework Completion Rate
+* Number of Assignments Created
+* Total Active Students
+
+Use localStorage calculations.
+
+---
+
+# Teacher Dashboard
+
+## My Classes
+
+When the teacher clicks on one of their classes, open a dedicated **Class Dashboard**.
+
+Inside the class dashboard display:
+
+### Students
+
+Show all joined students.
+
+Display:
+
+* Name
+* Roll Number
+
+---
+
+### Student Communication
+
+When clicking a student:
+
+* Send personal remarks/messages
+* View previous remarks
+
+Store everything using localStorage.
+
+Students should later receive these messages inside their Communication section.
+
+---
+
+## Homework
+
+Teachers can create homework with:
+
+* Homework Title
+* Description
+* Date Assigned
+* Deadline / Due Date
+
+Students should always see the deadline.
+
+---
+
+## Assignments
+
+Teachers can create assignments with:
+
+* Title
+* Description
+* Date Assigned
+* Due Date
+
+---
+
+## Notices
+
+Teachers can post notices containing:
+
+* Title
+* Description
+* Date Posted
+
+---
+
+## Attendance
+
+Teachers should be able to:
+
+* Mark Present
+* Mark Absent
+
+Students should later see:
+
+* Attendance Percentage
+* Present Days
+* Absent Days
+
+---
+
+## Teacher Analytics
+
+Display:
+
+* Number of Students
+* Homework Completion Percentage
+* Average Class XP
+* Pending Assignments
+* Recent Student Activity
+
+---
+
+# Student Dashboard
+
+## Student Registration
+
+Before joining a class, students must create a profile.
+
+Required:
+
+* Full Name
+* Roll Number
+
+Save using localStorage.
+
+Only after registration can students join classes.
+
+---
+
+## Joining Classes
+
+Students join using:
+
+* Class Join Code
+
+If valid:
+
+* Join class
+* Teacher immediately sees the student
+
+If invalid:
+
+* Show an error.
+
+---
+
+## Inside a Joined Class
+
+Use tabs or navigation buttons instead of showing everything together.
+
+Create the following sections:
+
+---
+
+### Homework
+
+Display:
+
+* Homework Title
+* Description
+* Date Assigned
+* Deadline
+
+Sort by nearest deadline.
+
+Students should also be able to:
+
+* Mark Homework as Started
+* Mark Homework as Completed
+
+Teachers should see completion status.
+
+---
+
+### Assignments
+
+Display:
+
+* Assignment Title
+* Description
+* Date Assigned
+* Due Date
+
+Students can mark assignments as submitted.
+
+Teachers should see:
+
+* Submitted
+* Pending
+* Submission Date
+
+---
+
+### Notices
+
+Display:
+
+* Title
+* Description
+* Date Posted
+
+Newest notices first.
+
+---
+
+### Communication
+
+Students should see:
+
+* Personal teacher remarks
+* Teacher messages
+
+Students cannot edit or delete messages.
+
+---
+
+# Student Profile
+
+Each student profile should display:
+
+* Name
+* Roll Number
+* Joined Class
+* XP
+* Level
+* Attendance Percentage
+* Homework Completed
+* Assignments Completed
+* Current Study Streak
+* Earned Badges
+
+---
+
+# Gamification
+
+## XP System
+
+Students earn XP for:
+
+* Joining a class
+* Completing homework
+* Completing assignments
+* Daily login
+* Maintaining study streaks
+
+Display total XP everywhere.
+
+---
+
+## Levels
+
+Automatically calculate levels.
+
+Example:
+
+Level 1 → 0 XP
+
+Level 2 → 100 XP
+
+Level 3 → 250 XP
+
+Level 4 → 500 XP
+
+Level 5 → 1000 XP
+
+---
+
+## Badges
+
+Unlock badges such as:
+
+* Homework Hero
+* Assignment Master
+* Perfect Attendance
+* Study Streak
+* Top Performer
+* Early Bird
+
+Display badges on the student profile.
+
+---
+
+## Leaderboards
+
+Create class-wise leaderboards based on XP.
+
+Display:
+
+* Rank
+* Student Name
+* XP
+* Level
+
+---
+
+# Notifications
+
+Students receive notifications when:
+
+* Homework is added
+* Assignment is added
+* Teacher sends a remark
+* School posts an announcement
+* XP is earned
+
+Teachers receive notifications when:
+
+* Students join classes
+* Homework is completed
+* Assignments are submitted
+
+---
+
+# Calendar
+
+Create a calendar showing:
+
+* Homework Deadlines
+* Assignment Deadlines
+* School Events
+* Exams
+* Holidays
+
+---
+
+# Search
+
+Teachers can search:
+
+* Students
+* Classes
+* Assignments
+
+Students can search:
+
+* Homework
+* Assignments
+* Notices
+
+---
+
+# Settings
+
+Allow users to edit:
+
+* Name
+* Profile Picture (placeholder)
+* Password (dummy for now)
+* Light/Dark Theme
+
+---
+
+# AI Placeholder
+
+Do not implement AI yet.
+
+Create a section called:
+
+**AI Study Assistant (Coming Soon)**
+
+Future plans include:
+
+* Personalized study plans
+* Revision schedules
+* Study recommendations
+* Performance insights
+
+---
+
+# Technical Requirements
+
+* Use only HTML, CSS, JavaScript, and localStorage.
+* Do not use Firebase yet.
+* Keep all existing functionality.
+* Do not remove or break current features.
+* Write clean, modular, and reusable code.
+* Build the project in a way that makes Firebase integration easy later.
+
+The final prototype should feel like a real, modern school ERP and student engagement platform that combines communication, academic management, analytics, and gamification into one complete system.

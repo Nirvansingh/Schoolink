@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SchoolQuest</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero-card">
+      <div>
+        <span class="eyebrow">SchoolQuest</span>
+        <h1>Welcome to SchoolQuest</h1>
+        <p>
+          Choose your role to continue as a Teacher or a Student. Your data is stored locally in the browser using localStorage.
+        </p>
+      </div>
+      <div class="hero-illustration">
+        <span>&#x1F393;</span>
+      </div>
+    </header>
+
+    <main class="role-grid">
+      <a class="role-card" href="school.html">
+        <div class="role-icon">🏫</div>
+        <h2>School</h2>
+        <p>Manage teachers, students, classes and school-wide announcements.</p>
+      </a>
+      <a class="role-card" href="teacher.html">
+        <div class="role-icon">&#x1F393;</div>
+        <h2>Teacher</h2>
+        <p>Manage classes, create homework, assignments, notices, and communicate with students.</p>
+      </a>
+      <a class="role-card" href="teacher-ai.html">
+        <div class="role-icon">🤖</div>
+        <h2>Teacher AI</h2>
+        <p>Generate quizzes, lesson plans, notices, and activities using AI.</p>
+      </a>
+      <a class="role-card" href="student.html">
+        <div class="role-icon">&#x1F392;</div>
+        <h2>Student</h2>
+        <p>Create a profile, join a class with a join code, and view class content in tabs.</p>
+      </a>
+    </main>
+  </div>
+    <script src="js/storage.js"></script>
+    </body>
+  </html>

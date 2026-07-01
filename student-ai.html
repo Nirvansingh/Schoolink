@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Study Assistant | SchoolQuest</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <div class="section-header">
+      <div>
+        <p class="eyebrow">AI Study Assistant</p>
+        <h1>Ask your AI study companion</h1>
+      </div>
+      <a class="secondary" href="student.html">← Back to Student Dashboard</a>
+    </div>
+
+    <section class="card ai-card">
+      <div class="section-header">
+        <div>
+          <h2>Study Chat</h2>
+          <p>Ask questions, request summaries, create quizzes, or get homework help.</p>
+        </div>
+      </div>
+      <div id="ai-chat-history" class="ai-chat"></div>
+      <div id="ai-loading" class="ai-loader hidden">
+        <span></span><span></span><span></span>
+        <span>Thinking...</span>
+      </div>
+      <div class="ai-input-row">
+        <textarea id="ai-user-prompt" placeholder="Ask the AI anything about school subjects, homework help, or study plans."></textarea>
+        <button id="ai-send-button" class="primary">Send</button>
+      </div>
+    </section>
+
+    <section class="card ai-card">
+      <div class="section-header">
+        <div>
+          <h2>AI Study Planner</h2>
+          <p>Enter your subjects, exam dates, and hours per day to generate a study plan.</p>
+        </div>
+      </div>
+      <div class="ai-input-row">
+        <input id="planner-subjects" type="text" placeholder="Subjects (comma separated)" />
+        <input id="planner-exam-date" type="date" placeholder="Exam date" />
+      </div>
+      <div class="ai-input-row">
+        <input id="planner-hours" type="number" min="1" placeholder="Hours per day" />
+        <button id="planner-button" class="primary">Generate Plan</button>
+      </div>
+      <div id="planner-output" class="ai-analytics-card"></div>
+    </section>
+
+    <section class="card ai-card">
+      <div class="section-header">
+        <div>
+          <h2>AI Homework Helper</h2>
+          <p>Paste your homework question and request help without getting the direct answer first.</p>
+        </div>
+      </div>
+      <textarea id="homework-question" placeholder="Paste homework text here..."></textarea>
+      <div class="ai-input-row">
+        <button id="homework-helper-button" class="primary">Get Help</button>
+      </div>
+      <div id="homework-output" class="ai-analytics-card"></div>
+    </section>
+
+    <section class="card ai-card">
+      <div class="section-header">
+        <div>
+          <h2>Quiz & Notes Generator</h2>
+          <p>Enter a topic to generate questions or helpful notes.</p>
+        </div>
+      </div>
+      <div class="ai-input-row">
+        <input id="quiz-topic" type="text" placeholder="Topic (e.g. Electricity)" />
+        <button id="quiz-button" class="primary">Generate Quiz</button>
+      </div>
+      <div class="ai-input-row">
+        <input id="notes-topic" type="text" placeholder="Topic or notes text" />
+        <button id="notes-button" class="primary">Generate Notes</button>
+      </div>
+      <div id="quiz-output" class="ai-analytics-card"></div>
+      <div id="notes-output" class="ai-analytics-card"></div>
+    </section>
+  </div>
+
+  <script src="ai-config.js"></script>
+  <script src="ai.js"></script>
+  <script>
+    const historyEl = document.getElementById('ai-chat-history');
+    const promptEl = document.getElementById('ai-user-prompt');
+    const sendButton = document.getElementById('ai-send-button');
+    const loadingEl = document.getElementById('ai-loading');
+
+    const plannerSubjects = document.getElementById('planner-subjects');
+    const plannerExamDate = document.getElementById('planner-exam-date');
+    const plannerHours = document.getElementById('planner-hours');
+    const plannerButton = document.getElementById('planner-button');
+    const plannerOutput = document.getElementById('planner-output');
+
+    const homeworkQuestion = document.getElementById('homework-question');
+    const homeworkButton = document.getElementById('homework-helper-button');
+    const homeworkOutput = document.getElementById('homework-output');
+
+    const quizTopic = document.getElementById('quiz-topic');
+    const quizButton = document.getElementById('quiz-button');
+    const quizOutput = document.getElementById('quiz-output');
+
+    const notesTopic = document.getElementById('notes-topic');
+    const notesButton = document.getElementById('notes-button');
+    const notesOutput = document.getElementById('notes-output');
+
+    function appendMessage(text, role) {
+      const message = document.createElement('div');
+      message.className = `ai-message ${role}`;
+      message.innerHTML = window.AI.formatAIText(text);
+      historyEl.appendChild(message);
+      historyEl.scrollTop = historyEl.scrollHeight;
+    }
+
+    function setLoading(isLoading) {
+      loadingEl.classList.toggle('hidden', !isLoading);
+    }
+
+    async function sendChat(prompt) {
+      if (!prompt.trim()) return;
+      appendMessage(prompt, 'user');
+      promptEl.value = '';
+      setLoading(true);
+      try {
+        const response = await window.AI.runAIQuery(prompt, { mode: 'student-chat' });
+        appendMessage(response, 'bot');
+      } catch (err) {
+        appendMessage('Sorry, the AI could not respond right now. Please try again later.', 'bot');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    sendButton.addEventListener('click', () => sendChat(promptEl.value));
+    promptEl.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        sendChat(promptEl.value);
+      }
+    });
+
+    plannerButton.addEventListener('click', async () => {
+      const prompt = `Create a personalized study plan for subjects: ${plannerSubjects.value}. Exam date: ${plannerExamDate.value}. Hours per day: ${plannerHours.value}.`;
+      plannerOutput.textContent = 'Generating study plan...';
+      try {
+        const response = await window.AI.runAIQuery(prompt, {
+          subjects: plannerSubjects.value,
+          examDate: plannerExamDate.value,
+          hoursPerDay: plannerHours.value,
+          mode: 'study-planner',
+        });
+        plannerOutput.innerHTML = window.AI.formatAIText(response);
+      } catch (err) {
+        plannerOutput.textContent = 'Unable to generate a study plan at this time.';
+      }
+    });
+
+    homeworkButton.addEventListener('click', async () => {
+      const prompt = `Help me with this homework question without giving the final answer unless I ask: ${homeworkQuestion.value}`;
+      homeworkOutput.textContent = 'Getting homework help...';
+      try {
+        const response = await window.AI.runAIQuery(prompt, { mode: 'homework-helper' });
+        homeworkOutput.innerHTML = window.AI.formatAIText(response);
+      } catch (err) {
+        homeworkOutput.textContent = 'Unable to provide homework help right now.';
+      }
+    });
+
+    quizButton.addEventListener('click', async () => {
+      const prompt = `Generate a quiz for the topic: ${quizTopic.value}. Include multiple choice, short answer, true/false, and fill in the blanks.`;
+      quizOutput.textContent = 'Generating quiz...';
+      try {
+        const response = await window.AI.runAIQuery(prompt, { mode: 'quiz-generator' });
+        quizOutput.innerHTML = window.AI.formatAIText(response);
+      } catch (err) {
+        quizOutput.textContent = 'Unable to generate a quiz right now.';
+      }
+    });
+
+    notesButton.addEventListener('click', async () => {
+      const prompt = `Create short notes, key points, and definitions for: ${notesTopic.value}`;
+      notesOutput.textContent = 'Generating notes...';
+      try {
+        const response = await window.AI.runAIQuery(prompt, { mode: 'notes-generator' });
+        notesOutput.innerHTML = window.AI.formatAIText(response);
+      } catch (err) {
+        notesOutput.textContent = 'Unable to generate notes right now.';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teacher Dashboard | SchoolQuest</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <div class="section-header">
+      <div>
+        <p class="eyebrow">Teacher Dashboard</p>
+        <h1>Class Management</h1>
+      </div>
+      <a class="secondary" href="index.html">← Back to Home</a>
+    </div>
+
+    <div id="teacher-login" class="card">
+      <h2>Teacher Access</h2>
+      <p>Enter the teacher access code to manage your classes.</p>
+      <div class="class-actions">
+        <input id="teacher-access-code" type="password" placeholder="Teacher access code" />
+        <button id="teacher-login-button">Enter</button>
+      </div>
+    </div>
+
+    <div id="teacher-profile-section" class="card hidden">
+      <h2>Teacher Profile</h2>
+      <p>Create your teacher profile before using the dashboard.</p>
+      <form id="teacher-profile-form">
+        <input id="teacher-name" type="text" placeholder="Full name" />
+        <input id="teacher-email" type="email" placeholder="Email address" />
+        <button id="teacher-save-profile" type="submit">Save Profile</button>
+      </form>
+    </div>
+
+    <div id="teacher-dashboard" class="hidden">
+      <div class="teacher-summary card">
+        <div class="section-header">
+          <div>
+            <h2>Welcome, <span id="teacher-profile-summary">Teacher</span></h2>
+            <p>Your profile is saved. Create classes and manage your students here.</p>
+          </div>
+        </div>
+      </div>
+      <div class="teacher-top">
+        <section class="card">
+          <div class="section-header">
+            <div>
+              <h2>Create New Class</h2>
+              <p>Teachers can create a unique class and issue a join code to students.</p>
+            </div>
+          </div>
+          <div class="class-actions">
+            <input id="teacher-class-name" type="text" placeholder="Class name (e.g. 8A Science)" />
+            <button id="create-class-button">Create Class</button>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="section-header">
+            <h2>My Classes</h2>
+          </div>
+          <ul id="teacher-class-list"></ul>
+        </section>
+      </div>
+
+      <div class="card">
+        <div class="section-header">
+          <div>
+            <h2>Class Dashboard</h2>
+            <p>Select a class to view students and send communication.</p>
+          </div>
+        </div>
+        <div id="class-detail-panel" class="hidden">
+          <div class="section-header">
+            <div>
+              <h3 id="selected-class-name">Class Name</h3>
+              <p>Join Code: <span id="selected-join-code"></span></p>
+            </div>
+          </div>
+
+          <div class="grid-two">
+            <div>
+              <h4>Enrolled Students</h4>
+              <ul id="class-student-list"></ul>
+            </div>
+            <div>
+              <h4>Attendance</h4>
+              <div class="form-actions">
+                <label>Date</label>
+                <input id="teacher-attendance-date" type="date" />
+                <div id="teacher-attendance-list" style="max-height:220px;overflow:auto;margin-top:8px"></div>
+                <button id="teacher-save-attendance">Save Attendance</button>
+              </div>
+            </div>
+            <div>
+              <h4>Send a Remark</h4>
+              <div class="form-actions">
+                <select id="message-student-select"></select>
+                <textarea id="teacher-message-text" placeholder="Write a personal remark for the selected student."></textarea>
+                <button id="send-message-button">Send Message</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-two">
+            <section>
+              <h4>Add Homework</h4>
+              <input id="teacher-homework-title" type="text" placeholder="Homework title" />
+              <textarea id="teacher-homework-description" placeholder="Homework description (optional)"></textarea>
+              <input id="teacher-homework-due" type="date" />
+              <button id="teacher-add-homework">Add Homework</button>
+            </section>
+            <section>
+              <h4>Add Assignment</h4>
+              <input id="teacher-assignment-title" type="text" placeholder="Assignment title" />
+              <textarea id="teacher-assignment-description" placeholder="Assignment description (optional)"></textarea>
+              <input id="teacher-assignment-due" type="date" />
+              <button id="teacher-add-assignment">Add Assignment</button>
+            </section>
+          </div>
+          <section style="margin-top: 24px;">
+            <h4>Add Notice</h4>
+            <input id="teacher-notice-title" type="text" placeholder="Notice title" />
+            <textarea id="teacher-notice-description" placeholder="Notice description"></textarea>
+            <button id="teacher-add-notice">Add Notice</button>
+          </section>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-header">
+          <div>
+            <h2>Quick Class Cards</h2>
+            <p>Tap a class card to open the class dashboard.</p>
+          </div>
+        </div>
+        <div id="class-cards"></div>
+      </div>
+
+      <section class="card">
+        <div class="section-header">
+          <div>
+            <h2>AI Teaching Assistant</h2>
+            <p>Use AI for homework generation, quizzes, lesson plans, and activity ideas.</p>
+          </div>
+          <a class="secondary" href="teacher-ai.html">Open AI Assistant</a>
+        </div>
+      </section>
+      <section class="card">
+        <div class="section-header">
+          <div>
+            <h2>Backup & Restore</h2>
+            <p>Download or restore your local prototype data.</p>
+          </div>
+        </div>
+        <div class="class-actions">
+          <button id="download-backup">Download Backup</button>
+          <input id="restore-file" type="file" accept="application/json" style="display:none" />
+          <button id="restore-backup">Restore Backup</button>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="script.js"></script>
+  <script>
+    // Backup/restore bindings
+    document.addEventListener('DOMContentLoaded', function () {
+      const dl = document.getElementById('download-backup');
+      const rb = document.getElementById('restore-backup');
+      const input = document.getElementById('restore-file');
+      if (dl) dl.addEventListener('click', () => window.Storage.downloadExport());
+      if (rb) rb.addEventListener('click', () => input && input.click());
+      if (input) input.addEventListener('change', async (e) => {
+        const f = e.target.files[0]; if (!f) return;
+        const text = await f.text();
+        try {
+          const parsed = JSON.parse(text);
+          if (!confirm('This will overwrite existing data. Continue?')) return;
+          window.Storage.importAll(parsed, { overwrite: true });
+          notify('Restore complete. Reloading page.', 'success'); location.reload();
+        } catch (err) { notify('Invalid file', 'error'); }
+      });
+    });
+  </script>
+</body>
+</html>
